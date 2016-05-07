@@ -4,7 +4,7 @@ include Capybara::DSL
 class WagsSiteDriver
 
   WAGS_URL = "http://www.cs.appstate.edu/wags/beta"
-  PATH_TO_PHANTOMJS = File.expand_path("../../../etc/phantomjs/bin/phantomjs", 
+  PATH_TO_PHANTOMJS = File.expand_path("../../etc/phantomjs/bin/phantomjs", 
     __FILE__)
 
   def initialize driver = :selenium
@@ -20,7 +20,6 @@ class WagsSiteDriver
   def initialize_selenium
     require 'selenium-webdriver'
     @current_driver = :selenium
-    @current_driver = :javascript_driver
   end
 
   def initialize_poltergeist
