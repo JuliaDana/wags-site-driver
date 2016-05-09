@@ -1,11 +1,12 @@
 require "magnetizer"
-require "lib/wags_site_driver.rb"
+require_relative "../lib/wags_site_driver.rb"
 
 require 'yaml'
 CREDENTIALS = YAML.load_file(File.expand_path("../creds.yaml", __FILE__))
+puts CREDENTIALS.inspect
 
 describe "The Web Driver" do
-  it "should log in to the website using selenium" do
+  xit "should log in to the website using selenium" do
     driver = WagsSiteDriver.new :selenium
     driver.log_in(CREDENTIALS)
     sleep 2
@@ -13,7 +14,7 @@ describe "The Web Driver" do
   end
 
   xit "should load a source file into the magnet creation page" do
-    magnetizer = Magnetizer.new("spec/java_hello/Hello.java", "Java")
+    magnetizer = Magnetizer::Magnetizer.new("spec/java_hello/Hello.java", "Java")
 
     driver = WagsSiteDriver.new :selenium
     #driver.log_in(CREDENTIALS)
@@ -24,7 +25,7 @@ describe "The Web Driver" do
     driver.load_title "Julia RSpec #{t}"
     driver.load_description "Automated at #{t}"
 
-    trans = MagnetTranslator.new
+    trans = Magnetizer::WagsMagnetTranslator.new
     driver.load_class_area trans.translate_to_wags_magnets(magnetizer.emitter.classMagnets)
     driver.load_functions_area trans.translate_to_wags_magnets(magnetizer.emitter.methodMagnets)
     driver.load_statements_area trans.translate_to_wags_magnets(magnetizer.emitter.preambleMagnets + magnetizer.emitter.statementMagnets)
@@ -39,8 +40,8 @@ describe "The Web Driver" do
     expect(page).to have_content("Logout")
   end
 
-  xit "should load a source file into the magnet creation page" do
-    magnetizer = Magnetizer.new("spec/java_hello/Hello.java", "Java")
+  it "should load a source file into the magnet creation page" do
+    magnetizer = Magnetizer::Magnetizer.new("spec/java_hello/Hello.java", "Java")
 
     driver = WagsSiteDriver.new :poltergeist
     #driver.log_in(CREDENTIALS)
@@ -51,7 +52,7 @@ describe "The Web Driver" do
     driver.load_title "Julia RSpec #{t}"
     driver.load_description "Automated at #{t}"
 
-    trans = MagnetTranslator.new
+    trans = Magnetizer::WagsMagnetTranslator.new
     driver.load_class_area trans.translate_to_wags_magnets(magnetizer.emitter.classMagnets)
     driver.load_functions_area trans.translate_to_wags_magnets(magnetizer.emitter.methodMagnets)
     driver.load_statements_area trans.translate_to_wags_magnets(magnetizer.emitter.preambleMagnets + magnetizer.emitter.statementMagnets)

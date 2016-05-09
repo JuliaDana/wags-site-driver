@@ -1,10 +1,11 @@
-source 'https://rubygems.org'
-
 # This is the tested version of ruby with this project. Comment out this 
 # line to try it with a different version.
-ruby '1.9.3', :engine => 'jruby', :engine_version => '1.7.16.1'
+#ruby=jruby-9.1.0.0
+ruby '2.3.0', :engine => 'jruby', :engine_version => '9.1.0.0'
 
-gem "magnetizer", :git => "https://github.com/juliadana/code-magnetizer.git"
+source 'https://rubygems.org'
+
+gem "magnetizer", :git => "https://github.com/juliadana/wags-magnetizer.git"
 
 gem "rspec"
 
